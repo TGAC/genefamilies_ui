@@ -1,0 +1,117 @@
+html{
+  min-height: 100%;
+}
+
+body {
+  background: white;
+  padding: 0px;
+  margin: 0px;
+  min-height: 100%
+}
+
+#menu a{
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  text-decoration: none;
+}
+
+#menu a:hover{
+  text-decoration: underline;
+}
+
+#menu{
+  border: 1px solid #2c3e50;
+  padding: 5px;
+  width: 100%;
+  text-align: right;
+  font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+table#metainfo td {
+  width: 33%;
+}
+
+.BLAST_results {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.BLAST_results td, #BLAST_results th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.BLAST_results tr:nth-child(even){background-color: #f2f2f2;}
+
+.BLAST_results tr:hover {background-color: #ddd;}
+
+.BLAST_results th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: grey;
+  color: white;
+}
+
+footer{
+/*	text-align: center;
+	bottom: 0px;
+	/*position: fixed;*/
+	/*width: 100%;*/
+	/*background-color: #2c3e50;*/
+  /*color:white;*/
+  /*height: 20px;*/
+  /*position: relative;*/
+  /*flex-shrink: 0;*/*/
+
+    clear: both;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    bottom: 0px;
+}
+
+footer a{
+  /*text-align: center;*/
+  /*bottom: 0px;*/
+  /*position: fixed;*/
+  /*width: 100%;*/
+  /*background-color: #2c3e50;*/
+  color:white
+}
+
+#footer_above{
+  text-align: center;
+  bottom: 20px;
+  position: absolute;
+  /*width: 100%;*/
+  background-color: white;
+  left: -20px;
+}
+
+.sequences_table{
+/*  width: 500px;
+  font-size: smaller;
+  font-family: monospace;*/
+}
+
+.download_btn{
+  padding:10px;
+  font-size : large
+}
+
+#funders-logo img{
+  padding: 5px;
+}
+
+#funders-logo A{
+  text-decoration:none;
+  color: white;
+} 
