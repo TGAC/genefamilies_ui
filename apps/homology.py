@@ -51,7 +51,7 @@ def get_homology_table(cluster_id):
 
 
         table_header = [
-            html.Thead(html.Tr([html.Th("Gene"), html.Th("homology")]))
+            html.Thead(html.Tr([html.Th("Gene"), html.Th("Gene"), html.Th("homology")]))
         ]
 
         homology_row = []
@@ -59,8 +59,9 @@ def get_homology_table(cluster_id):
             homology = response["results"][0]["results"][0]["data"]["homology"]
             for h in homology.split("},{"):
 
-                gene_id,homology_type = h.replace("{","").replace("},","").replace("}","").split(",")
-                homology_row.append(html.Tr([html.Td(gene_id.split(":")[1]), html.Td(homology_type.split(":")[1])]))
+                # removing quotes ('), { and }, then splitting with comma
+                query_id,target_id,homology_type = h.replace("'","").replace("{","").replace("},","").replace("}","").split(",")
+                homology_row.append(html.Tr([html.Td(query_id.split(":")[1]),html.Td(target_id.split(":")[1]), html.Td(homology_type.split(":")[1])]))
 
             table_body = [html.Tbody(homology_row)]
 
