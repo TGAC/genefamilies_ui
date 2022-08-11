@@ -204,6 +204,10 @@ def render_content(tab, cluster_id):
 
         fasta = get_alignments(cluster_id)
 
+        height = fasta.count(">") * 10
+
+        print(height)
+
 
         return html.Div(
                 id='aln_viewer', 
@@ -215,7 +219,7 @@ def render_content(tab, cluster_id):
                     'font-size': 'x-large'
                 },
                 children = [ 
-                dashbio.AlignmentChart(id='alignment_viewer2', data=fasta, height=900, tilewidth=30)        # )                
+                dashbio.AlignmentChart(id='alignment_viewer2', data=fasta, height=height, tilewidth=10)        # )                
                 ]
             ),
     elif tab == 'tab-homology':
