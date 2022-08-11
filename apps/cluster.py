@@ -36,6 +36,7 @@ from .sequence import (
 
 from .homology import (
     get_homology_table,
+    get_homology_csv
 )
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -264,8 +265,24 @@ def render_content(tab, cluster_id):
                         children=[
                         html.Td(
                     children=[
-                    "Download Tree in Newick format"]),
+                    "Download Full GeneTree in Newick format"]),
                     html.Td(children=[html.Button("Download Tree", id="btn-download-tree", className="download_btn")]),
+                    ]
+                    ),
+                    html.Tr(
+                        children=[
+                        html.Td(
+                    children=[
+                    "Download Sub GeneTree in Newick format"]),
+                    html.Td(children=[html.Button("Download Tree", id="btn-download-subtree", className="download_btn")]),
+                    ]
+                    ),
+                    html.Tr(
+                        children=[
+                        html.Td(
+                    children=[
+                    "Download Homology"]),
+                    html.Td(children=[html.Button("Download Homology", id="btn-download-homology", className="download_btn")]),
                     ]
                     ),
                     html.Tr(
@@ -284,8 +301,10 @@ def render_content(tab, cluster_id):
                     )
                 ]),
                 dcc.Download(id="download-tree"),
+                dcc.Download(id="download-subtree"),
                 dcc.Download(id="download-aln"),
                 dcc.Download(id="download-fa"),
+                dcc.Download(id="download-homology"),
             ])
 
 
@@ -296,7 +315,20 @@ def render_content(tab, cluster_id):
 )
 def download_tree(n_clicks):
 
-    tree = get_newick_tree(cluster_id)
+    tree = get_newick_tree(cluster_id, "genetree")
+    filename = "GeneTrees_"+cluster_id+"_tree.nhx"
+
+    return dict(content=tree, filename=filename)
+
+
+@callback(
+    Output("download-subtree", "data"),
+    Input("btn-download-subtree", "n_clicks"),
+    prevent_initial_call=True,
+)
+def download_subtree(n_clicks):
+
+    tree = get_newick_tree(cluster_id, "subtree")
     filename = "GeneTrees_"+cluster_id+"_tree.nhx"
 
     return dict(content=tree, filename=filename)
@@ -328,6 +360,16 @@ def download_fa(n_clicks):
     filename = "GeneTrees_"+cluster_id+"_tree.fa"
     return dict(content=seq_file, filename=filename)
 
+@callback(
+    Output("download-homology", "data"),
+    Input("btn-download-homology", "n_clicks"),
+    prevent_initial_call=True,
+)
+def download_homology(n_clicks):
+    homology = get_homology_csv(cluster_id)
+
+    filename = "GeneTrees_"+cluster_id+"_homology.csv"
+    return dict(content=homology, filename=filename)
 
 
 if __name__ == '__main__':

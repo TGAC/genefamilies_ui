@@ -69,6 +69,39 @@ def get_homology_table(cluster_id):
 
     return table
 
+def get_homology_csv(cluster_id):
+    ploads = {
+        "services": [{
+            "so:name": "GeneTrees search service",
+            "start_service": True,
+            "parameter_set": {
+            "level": "simple",
+            "parameters": [{
+                "param": "GT Cluster",
+                "current_value": cluster_id
+                }]
+            }
+        }]
+    }
+
+    r = requests.post(config.grassroots_url,json=ploads)
+
+    if r.status_code == 200:
+        response = json.loads(r.text)
+
+        status = response["results"][0]["status"]
+        status_text = response["results"][0]["status_text"]
+
+        homology_csv = ""
+        if status == 5:
+            homology = response["results"][0]["results"][0]["data"]["homology"]
+            for h in homology.split("},{"):
+
+                # removing quotes ('), { and }, then splitting with comma
+                query_id,target_id,homology_type = h.replace("'","").replace("{","").replace("},","").replace("}","").split(",")
+                homology_csv += query_id.split(":")[1] + "," + target_id.split(":")[1] + "," + homology_type.split(":")[1] + "\n"
+
+    return homology_csv
 
 if __name__ == '__main__':
     app.run_server(debug=True)
